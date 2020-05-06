@@ -13,7 +13,7 @@ export default class InvitationsComponent extends Component {
   lastName = '';
 
   @tracked
-  role = '';
+  role = null;
 
   @tracked
   email = '';
@@ -27,6 +27,7 @@ export default class InvitationsComponent extends Component {
    * @type {Router}
    */
   @service router;
+
   @action
   updateFirstName(evt) {
     this.firstName = evt.target.value;
@@ -36,21 +37,30 @@ export default class InvitationsComponent extends Component {
   @action
   updateLastName(evt) {
     this.lastName = evt.target.value;
+    console.log(this.lastName);
   }
 
   @action
   updateEmail(evt) {
     this.email = evt.target.value;
+    console.log(this.email);
   }
 
+
+  /**
+   * 
+   * @param {Event & {target: HTMLSelectElement}} evt 
+   */
   @action
-  onSelectedChange(evt) {
+  onSelectChanged(evt) {
     this.role = evt.target.value;
+    console.log(this.role);
   }
   
   @action
   updateTitle(evt) {
     this.title = evt.target.value;
+    console.log(this.title);
   }
 
   @action
@@ -65,21 +75,15 @@ export default class InvitationsComponent extends Component {
         email: this.email
       }
     }
-    debugger;
-    await fetch('https://engage.staging.saleswhale.com/api/v1/invites', {
+    const resp = await fetch('https://engage.staging.saleswhale.com/api/v1/invites', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Author': 'Bearer ' + sessionStorage.getItem('token'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
       },
       body: JSON.stringify(inviteData),
     })
-  }
 
-  @action
-  test(evt) {
-    evt.preventDefault();
-    alert(777);
+    await resp.json();
   }
-
 }

@@ -1,0 +1,46 @@
+<div class="mx-auto">
+  <div class="flex justify-center flex-row w-full">
+    <div class="w-full max-w-xs">
+      <form {{on "submit" this.sendInvite}} class="bg-grey-light shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+        <label for="firstName">First Name</label>
+        <input
+          class="bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+          required id='firstName' placeholder="Enter First Name" value={{this.firstName}}
+          {{on "input" this.updateFirstName}}>
+        <br />
+
+        <label for="lastName">Last Name</label>
+        <input
+          class="bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+          required id='lastName' placeholder="Enter Last Name" value={{this.lastName}}
+          {{on "input" this.updateLastName}}>
+        <br />
+
+        <label for="email">Email</label>
+        <input
+          class="bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+          required id='email' placeholder="Enter Email" value={{this.email}} {{on "input" this.updateEmail}}>
+        <br />
+
+        <label for="title">Title</label>
+        <input
+          class="bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+          id='title' placeholder="Enter Title" value={{this.title}} {{on "input" this.updateTitle}}>
+
+        <label for="role">Role</label>
+        <select {{on "change" this.onSelectChanged}}
+          class="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+          <option value="admin">Admin</option>
+          <option value="member">Member</option>
+        </select>
+        <button class="bg-teal-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+          Send Invite!
+        </button>
+        {{#if this.errorMessage}}
+          <p>{{this.errorMessage}}</p>
+        {{/if}}
+      </form>
+    </div>
+  </div>
+</div>
